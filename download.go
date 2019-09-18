@@ -10,6 +10,8 @@ import (
 
 // @ref https://zhangzifan.com/update-qqwry-dat.html
 
+const Address = "http://update.cz88.net/ip/qqwry.rar"
+
 // getKey from cz88.net
 func getKey() (uint32, error) {
 	resp, err := http.Get("http://update.cz88.net/ip/copywrite.rar")
@@ -28,7 +30,7 @@ func getKey() (uint32, error) {
 
 // GetOnline get data from online server
 func GetOnline() ([]byte, error) {
-	resp, err := http.Get("http://update.cz88.net/ip/qqwry.rar")
+	resp, err := http.Get(Address)
 	if err != nil {
 		return nil, err
 	}

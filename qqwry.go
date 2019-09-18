@@ -19,8 +19,7 @@ func (f *fileData) InitIPData() (rs interface{}) {
 	var tmpData []byte
 
 	// 判断文件是否存在
-	_, err := os.Stat(f.FilePath)
-	if err != nil && os.IsNotExist(err) {
+	if _, err := os.Stat(f.FilePath); err != nil && os.IsNotExist(err) {
 		log.Println("文件不存在，尝试从网络获取最新纯真 IP 库")
 		tmpData, err = GetOnline()
 		if err != nil {
