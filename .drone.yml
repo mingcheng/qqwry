@@ -34,7 +34,7 @@ steps:
       - name: docker-sock
         path: /var/run/docker.sock
     commands:
-      - docker login -u=${DOCKER_USERNAME} -p=${DOCKER_PASSWORD} ghcr.io
+      - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD ghcr.io
       - docker build . -t ghcr.io/mingcheng/qqwry:`date +%Y%m%d`
       - docker push ghcr.io/mingcheng/qqwry:`date +%Y%m%d`
       - docker logout
