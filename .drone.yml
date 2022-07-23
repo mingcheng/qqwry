@@ -1,0 +1,67 @@
+###
+# File: .drone.yml
+# Author: Ming Cheng<mingcheng@outlook.com>
+#
+# Created Date: Monday, March 9th 2020, 5:11:52 pm
+# Last Modified: Friday, July 15th 2022, 5:38:32 pm
+#
+# http://www.opensource.org/licenses/MIT
+###
+
+kind: pipeline
+type: docker
+name: build_and_run_on_docker
+
+steps:
+  - name: build
+    image: golang:1.18
+    environment:
+      GOPROXY: 'https://goproxy.cn,direct'
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+    commands:
+      - make clean test build
+
+  - name: weekly build
+    image: docker:stable
+    environment:
+      DOCKER_USERNAME:
+        from_secret: ghcr_docker_username
+      DOCKER_PASSWORD:
+        from_secret: ghcr_docker_password
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+    commands:
+      - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD ghcr.io
+      - docker build . -t ghcr.io/mingcheng/qqwry:`date +%Y%m%d`
+      - docker push ghcr.io/mingcheng/qqwry:`date +%Y%m%d`
+      - docker logout
+
+  - name: publish-to-ghcr
+    image: plugins/docker
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+    environment:
+    when:
+      branch:
+        - master
+      event:
+        - push
+    settings:
+      registry: ghcr.io
+      repo: ghcr.io/mingcheng/qqwry
+      username:
+        from_secret: ghcr_docker_username
+      password:
+        from_secret: ghcr_docker_password
+      dockerfile: Dockerfile
+      tags:
+        - latest
+
+volumes:
+  - name: docker-sock
+    host:
+      path: /var/run/docker.sock

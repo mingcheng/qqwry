@@ -10,7 +10,15 @@ import (
 	"time"
 )
 
+var (
+	version = "dev"
+	commit  = ""
+	date    = ""
+)
+
 func main() {
+	fmt.Printf("version %s(%s) build on %s\n", version, commit, date)
+
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	datFile := flag.String("qqwry", "./qqwry.dat", "纯真 IP 库的地址")
 	port := flag.String("port", "2060", "HTTP 请求监听端口号")
