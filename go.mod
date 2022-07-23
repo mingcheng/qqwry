@@ -1,9 +1,8 @@
 module github.com/freshcn/qqwry
 
-go 1.12
+go 1.18
 
 require (
-	github.com/cweill/gotests v1.5.3 // indirect
-	github.com/pquerna/ffjson v0.0.0-20181028064349-e517b90714f7
-	golang.org/x/text v0.3.2
+	github.com/pquerna/ffjson v0.0.0-20190930134022-aa0246cd15f7
+	golang.org/x/text v0.3.7
 )

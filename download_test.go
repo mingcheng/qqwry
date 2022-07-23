@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/ioutil"
 	"testing"
 )
 
@@ -24,5 +25,10 @@ func TestGetOnline(t *testing.T) {
 	if len(got) <= 0 {
 		t.Errorf("GetOnline() error, response empty")
 		return
+	}
+
+	err = ioutil.WriteFile("qqwry.dat", got, 0644)
+	if err != nil {
+		t.Error(err)
 	}
 }

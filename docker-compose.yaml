@@ -1,0 +1,9 @@
+version: "3"
+services:
+  obsync:
+    build:
+      context: .
+    image: ghcr.io/mingcheng/qqwry
+    ports:
+      - 2060:2060
+    restart: on-failure
