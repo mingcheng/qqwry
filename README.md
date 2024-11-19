@@ -1,6 +1,8 @@
-# qqwry.go
+ ## 此项目不再更新，是因为 CZ88 官方已经从 2024.10 开始不提供 dat 格式的 IP 离线数据库文件
 
-[![travis ci](https://travis-ci.org/freshcn/qqwry.svg?branch=master)](https://travis-ci.org/freshcn/qqwry)
+Shame on you! 理解纯真公司基于商业盈利目的带来的各种营收压力，但是请您不要以社区的名义不实宣传 https://cz88.net/geo-public
+
+# qqwry.go
 
 通过 HTTP 提供一个 IP 地址归属地查询支持的微服务，使用纯真的 IP 库（支持直接在线获取和更新）。
 
